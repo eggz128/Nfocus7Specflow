@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
 using FluentAssertions;
+using Nfocus7Specflow.Support;
 
 namespace Nfocus7Specflow.StepDefinitions
 {
@@ -13,14 +14,15 @@ namespace Nfocus7Specflow.StepDefinitions
         private readonly ScenarioContext _scenarioContext;
         private string someCapturedValue;
         private IWebDriver _driver;
+        private readonly WDWrapper _wdWrapper;
 
 
-
-        public GoogleSteps(ScenarioContext scenarioContext) //Specflow will give this class the same ScenarioCOntext as was created in Hooks
+        public GoogleSteps(WDWrapper wdWrapper, ScenarioContext scenarioContext) //Specflow will give this class the same ScenarioCOntext as was created in Hooks
         {
             _scenarioContext = scenarioContext;
-            _driver = (IWebDriver)_scenarioContext["webdriver"];
-            //_driver = (IWebDriver)scenarioContext["notawebdriver"];
+            //_driver = (IWebDriver)_scenarioContext["webdriver"]; //Casts object from ScenarioContext back in to IWebDriver
+            //_driver = (IWebDriver)scenarioContext["notawebdriver"]; //Casts object from ScenarioContext back in to IWebDriver --BUT that object was a String. Will "go bang" at run time. Compiler can't pre-warn us of that.
+            _driver = wdWrapper.Driver; //wdWrapper *cannot* contain anything other than an IWebDriver instance. It *can't* accidentally hold just a string. It might be null though...
         }
 
         [Given(@"That I have navigated to Google")] //Allow alternative phrasing for the same actions with multiple annotations

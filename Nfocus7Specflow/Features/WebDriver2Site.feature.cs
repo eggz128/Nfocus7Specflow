@@ -96,7 +96,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("That I am on the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
- testRunner.When("I use the username \"edgewords\" and password \"edgewords123\" to log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I use the username \"edgewords\" and password \"edgewords123xxxxxxxxxx\" to log in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
  testRunner.Then("I am logged in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

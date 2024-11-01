@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Nfocus7Specflow.Support;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,13 @@ namespace Nfocus7Specflow.StepDefinitions
 
         private readonly ScenarioContext _scenarioContext;
         private IWebDriver _driver;
+        private readonly WDWrapper _wdWrapper;
 
-
-        public MoreGoogleSteps(ScenarioContext scenarioContext) //Specflow will give this class the same ScenarioCOntext as was created in Hooks
+        public MoreGoogleSteps(WDWrapper wdWrapper, ScenarioContext scenarioContext) //Specflow will give this class the same ScenarioCOntext as was created in Hooks
         {
             _scenarioContext = scenarioContext;
-            _driver = (IWebDriver)_scenarioContext["webdriver"];
+            //_driver = (IWebDriver)_scenarioContext["webdriver"];
+            _driver = wdWrapper.Driver; //wdWrapper *cannot* contain anything other than an IWebDriver instance. It *can't* accidentally hold just a string. It might be null though...
         }
 
         [Then(@"""(.*)"" is the number '(\d)' result")]

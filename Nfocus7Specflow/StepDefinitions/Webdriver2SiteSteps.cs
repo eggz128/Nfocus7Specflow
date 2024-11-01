@@ -1,4 +1,5 @@
 ﻿using Nfocus7Specflow.POMs;
+using Nfocus7Specflow.Support;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
@@ -12,11 +13,12 @@ namespace Nfocus7Specflow.StepDefinitions
     {
         private readonly ScenarioContext _scenarioContext;
         private IWebDriver _driver;
-
-        public Webdriver2SiteSteps(ScenarioContext scenarioContext)
+        private readonly WDWrapper _wdWrapper;
+        public Webdriver2SiteSteps(WDWrapper wdWrapper, ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            _driver = (IWebDriver)_scenarioContext["webdriver"];
+            //_driver = (IWebDriver)_scenarioContext["webdriver"];
+            _driver = wdWrapper.Driver; //wdWrapper *cannot* contain anything other than an IWebDriver instance. It *can't* accidentally hold just a string. It might be null though...
         }
         [Given(@"That I am on the login page")]
         public void GivenThatIAmOnTheLoginPage()
