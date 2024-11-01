@@ -8,6 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using NUnit.Framework;
+[assembly: Parallelizable(ParallelScope.Fixtures)] //Can only parallelise Features
+[assembly: LevelOfParallelism(8)] //Worker thread i.e. max amount of Features to run in Parallel
+
 namespace Nfocus7Specflow.StepDefinitions
 {
     [Binding]
