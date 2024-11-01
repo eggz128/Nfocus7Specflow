@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,25 @@ namespace Nfocus7Specflow.StepDefinitions
         [Before] //Similar to NUnit [SetUp]
         public void SetUp()
         {
-            _driver = new ChromeDriver();
+           
+
+            string browser = Environment.GetEnvironmentVariable("browser");
+
+            switch (browser)
+            {
+                case "firefox":
+                    _driver = new FirefoxDriver();
+                    break;
+                case "chrome":
+                    _driver = new ChromeDriver();
+                    break;
+
+                default:
+                    Assert.Fail("No browser set");
+                    break;
+            }
+
+
             _scenarioContext.Add("webdriver", _driver); //Javaish
             //_scenarioContext["alsowebdriver"] = _driver; //C#ish
             _scenarioContext["notawebdriver"] = "not a webdriver";
