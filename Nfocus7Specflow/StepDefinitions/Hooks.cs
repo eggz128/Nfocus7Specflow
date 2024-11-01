@@ -29,6 +29,7 @@ namespace Nfocus7Specflow.StepDefinitions
             _scenarioContext.Add("webdriver", _driver); //Javaish
             //_scenarioContext["alsowebdriver"] = _driver; //C#ish
             _scenarioContext["notawebdriver"] = "not a webdriver";
+            //A comment
         }
         [After] //Similar to NUnit [TearDown]
         public void TearDown()
