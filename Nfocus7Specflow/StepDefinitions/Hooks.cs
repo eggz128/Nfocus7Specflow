@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 using NUnit.Framework;
 using Nfocus7Specflow.Support;
-[assembly: Parallelizable(ParallelScope.Fixtures)] //Can only parallelise Features
-[assembly: LevelOfParallelism(8)] //Worker thread i.e. max amount of Features to run in Parallel
+//[assembly: Parallelizable(ParallelScope.Fixtures)] //Can only parallelise Features
+//[assembly: LevelOfParallelism(8)] //Worker thread i.e. max amount of Features to run in Parallel
 
 namespace Nfocus7Specflow.StepDefinitions
 {
@@ -29,7 +29,7 @@ namespace Nfocus7Specflow.StepDefinitions
             _wdWrapper = wdWrapper; //WDWrapper will be instanticated and passed in by Specflow
         }
 
-        [Before] //Similar to NUnit [SetUp]
+        [Before("@gui")] //Similar to NUnit [SetUp]
         public void SetUp()
         {
            
@@ -58,7 +58,7 @@ namespace Nfocus7Specflow.StepDefinitions
             _wdWrapper.Driver = _driver; //Typesafe storage of WebDriver
             //_wdWrapper.Driver = "not a webdriver"; //Wont compile. A string is not a IWebDriver.
         }
-        [After] //Similar to NUnit [TearDown]
+        [After("@gui")] //Similar to NUnit [TearDown]
         public void TearDown()
         {
             _driver.Quit();
